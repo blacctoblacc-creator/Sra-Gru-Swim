@@ -12,6 +12,7 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm i -g eas-cli
-      - env:
+      - run: eas whoami || true
+      - run: eas build --platform android --profile preview --non-interactive
+        env:
           EAS_TOKEN: ${{ secrets.EAS_TOKEN }}
-        run: eas build --platform android --profile preview --non-interactive
