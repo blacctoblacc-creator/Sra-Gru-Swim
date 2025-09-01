@@ -1,33 +1,12 @@
-name: Build Android (EAS)
+name: Teste YAML
 
 on:
   workflow_dispatch:
   push:
     branches: [ "main" ]
-    paths:
-      - "**.js"
-      - "**.json"
-      - "assets/**"
-      - ".github/workflows/main.yml"
 
 jobs:
-  build-android:
+  ping:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Setup Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
-
-      - name: Setup EAS CLI
-        uses: expo/expo-github-action@v8
-        with:
-          eas-version: latest
-          token: ${{ secrets.EXPO_TOKEN }}
-
-      - name: Start Android build (APK)
-        run: npx eas build --platform android --profile production --non-interactive --no-wait
-```0
+      - run: echo "workflow OK"
