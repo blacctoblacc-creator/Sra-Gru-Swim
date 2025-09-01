@@ -4,6 +4,8 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      EXPO_TOKEN: ${{ secrets.EAS_TOKEN }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -12,7 +14,7 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm i -g eas-cli
-      - run: eas whoami || true
-      - run: eas build --platform android --profile preview --non-interactive
-        env:
-          EXPO_TOKEN: ${{ secrets.EAS_TOKEN }}
+      - name: Login to EAS
+        run: eas whoami || eas login --token "$EXPO_TOKEN"
+      - name: Build Android (preview)
+        run: eas build --platform android --profile preview --non-interactive
