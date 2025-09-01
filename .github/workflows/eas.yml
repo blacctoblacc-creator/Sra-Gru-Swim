@@ -13,11 +13,12 @@ jobs:
       - run: npm ci
       - run: npm i -g eas-cli
 
-      - name: Login to EAS
+      - name: Login to Expo (EAS)
         env:
           EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
         run: |
           eas whoami || eas login --token "$EXPO_TOKEN"
+          eas whoami
 
       - name: Build Android
         env:
