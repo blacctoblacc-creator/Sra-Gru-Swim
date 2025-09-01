@@ -1,0 +1,31 @@
+{
+  "expo": {
+    "name": "Sra Gru Swim",
+    "slug": "sra-gru-swim",
+    "owner": "blacctoblacc",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#000000"
+    },
+    "userInterfaceStyle": "light",
+    "android": {
+      "android.package": "com.sragruswim.app",
+      "softwareKeyboardLayoutMode": "resize",
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/icon.png",
+        "backgroundColor": "#000000"
+      }
+    },
+    "web": {
+      "bundler": "metro",
+      "favicon": "./assets/icon.png"
+    },
+    "extra": {
+      "eas": { "projectId": "70f0734d-28df-4fa3-9351-688a40abc45d" }
+    }
+  }
+}
