@@ -4,6 +4,8 @@ on: { workflow_dispatch: {} }
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}   # <-- disponibiliza o token para todos os passos
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -13,14 +15,8 @@ jobs:
       - run: npm ci
       - run: npm i -g eas-cli
 
-      - name: Login to Expo (EAS)
-        env:
-          EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
-        run: |
-          eas whoami || eas login --token "$EXPO_TOKEN"
-          eas whoami
+      - name: Login (ou confirma login)
+        run: eas whoami || eas login --token "$EXPO_TOKEN"
 
       - name: Build Android
-        env:
-          EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
         run: eas build --platform android --profile preview --non-interactive
