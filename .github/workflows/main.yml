@@ -1,7 +1,14 @@
-name: Build Android APK (EAS)
+name: Build Android (EAS)
 
 on:
   workflow_dispatch:
+  push:
+    branches: [ "main" ]
+    paths:
+      - "**.js"
+      - "**.json"
+      - "assets/**"
+      - ".github/workflows/main.yml"
 
 jobs:
   build-android:
@@ -13,29 +20,14 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: 18
-          cache: npm
+          node-version: 20
 
-      - name: Install deps
-        run: npm ci
-
-      - name: Install EAS CLI
-        run: npm i -g eas-cli
-
-      - name: Build APK (cloud)
-        env:
-          EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
-        run: |
-          eas build --platform android --profile production --non-interactive --wait
-
-      - name: Download APK
-        env:
-          EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
-        run: eas build:download --platform android --profile production --latest --path app.apk
-
-      - name: Upload artifact
-        uses: actions/upload-artifact@v4
+      - name: Setup EAS CLI
+        uses: expo/expo-github-action@v8
         with:
-          name: app-apk
-          path: app.apk
+          eas-version: latest
+          token: ${{ secrets.EXPO_TOKEN }}
+
+      - name: Start Android build (APK)
+        run: npx eas build --platform android --profile production --non-interactive --no-wait
 ```0
