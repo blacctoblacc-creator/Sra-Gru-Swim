@@ -10,6 +10,7 @@ on:
       - "assets/**"
       - "package.json"
       - "eas.json"
+      - ".github/workflows/main.yml"
 
 jobs:
   build-android:
@@ -21,10 +22,10 @@ jobs:
       - name: Node 18
         uses: actions/setup-node@v4
         with:
-            node-version: 18
-            cache: 'npm'
+          node-version: 18
+          cache: npm
 
-      - name: Instalar deps
+      - name: Instalar dependências
         run: npm install
 
       - name: Instalar EAS CLI
