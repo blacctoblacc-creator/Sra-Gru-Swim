@@ -5,7 +5,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     env:
-      EXPO_TOKEN: ${{ secrets.EAS_TOKEN }}
+      EXPO_TOKEN: ${{ secrets.EAS_TOKEN }}   # mapeia o segredo p/ variável que o EAS usa
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
