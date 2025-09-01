@@ -1,12 +1,37 @@
-name: Teste YAML
+name: Build Android (EAS)
 
 on:
   workflow_dispatch:
   push:
     branches: [ "main" ]
+    paths:
+      - "app.json"
+      - "App.js"
+      - "assets/**"
+      - "package.json"
+      - "eas.json"
 
 jobs:
-  ping:
+  build-android:
     runs-on: ubuntu-latest
     steps:
-      - run: echo "workflow OK"
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Node 18
+        uses: actions/setup-node@v4
+        with:
+            node-version: 18
+            cache: 'npm'
+
+      - name: Instalar deps
+        run: npm install
+
+      - name: Instalar EAS CLI
+        run: npm install -g eas-cli
+
+      - name: Login no EAS
+        run: eas login --token ${{ secrets.EXPO_TOKEN }}
+
+      - name: Build APK (produção)
+        run: eas build --platform android --profile production --non-interactive --wait
