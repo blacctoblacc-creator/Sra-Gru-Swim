@@ -1,16 +1,7 @@
 name: Build Android (EAS)
 
 on:
-  workflow_dispatch:
   push:
-    branches: [ "main" ]
-    paths:
-      - "app.json"
-      - "App.js"
-      - "assets/**"
-      - "package.json"
-      - "eas.json"
-      - ".github/workflows/main.yml"
 
 jobs:
   build-android:
@@ -23,16 +14,16 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 18
-          cache: npm
 
       - name: Instalar dependências
         run: npm install
 
       - name: Instalar EAS CLI
-        run: npm install -g eas-cli
+        run: npm i -g eas-cli
 
       - name: Login no EAS
         run: eas login --token ${{ secrets.EXPO_TOKEN }}
 
       - name: Build APK (produção)
-        run: eas build --platform android --profile production --non-interactive --wait
+        run: eas build --platform android --profile production --non-interactive
+```0
