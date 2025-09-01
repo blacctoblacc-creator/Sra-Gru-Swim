@@ -2,28 +2,28 @@ name: Build Android (EAS)
 
 on:
   push:
+    branches: [main]
+  workflow_dispatch:
 
 jobs:
   build-android:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      - name: Node 18
-        uses: actions/setup-node@v4
+      - uses: actions/setup-node@v4
         with:
           node-version: 18
+          # sem cache para não exigir lockfile
+
+      - name: Instalar EAS CLI
+        run: npm install -g eas-cli
 
       - name: Instalar dependências
         run: npm install
 
-      - name: Instalar EAS CLI
-        run: npm i -g eas-cli
-
-      - name: Login no EAS
-        run: eas login --token ${{ secrets.EXPO_TOKEN }}
-
       - name: Build APK (produção)
+        env:
+          EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
         run: eas build --platform android --profile production --non-interactive
 ```0
