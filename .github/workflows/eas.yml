@@ -1,25 +1,19 @@
 name: Build Android (EAS)
-on:
-  workflow_dispatch:
+on: { workflow_dispatch: {} }
 jobs:
   build:
     runs-on: ubuntu-latest
-    env:
-      EXPO_TOKEN: ${{ secrets.EAS_TOKEN }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
-        with:
-          node-version: 20
-          cache: npm
+        with: { node-version: 20, cache: npm }
       - run: npm ci
       - run: npm i -g eas-cli
-
       - name: Login to EAS
-        run: eas whoami || eas login --token "$EXPO_TOKEN"
-
-      - name: Confirm login
-        run: eas whoami
-
-      - name: Build Android (preview)
+        run: eas whoami || eas login --token $EXPO_TOKEN
+        env:
+          EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
+      - name: Build Android
         run: eas build --platform android --profile preview --non-interactive
+        env:
+          EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
