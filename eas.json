@@ -1,7 +1,8 @@
 {
-  "cli": { "version": ">= 13.2.0" },
-  "build": {
-    "preview": { "android": { "buildType": "apk" } },
-    "production": { "android": { "buildType": "app-bundle" } }
+  "expo": {
+    "name": "Sra Gru Swim",
+    "slug": "sra-gru-swim",
+    "android": { "package": "com.paulinho.sragru" },
+    "extra": { "eas": { "projectId": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX" } }
   }
 }
