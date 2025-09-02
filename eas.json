@@ -1,4 +1,6 @@
-{
+{git add eas.json
+git commit -m "fix: remover chave expo do eas.json"
+git push
   "expo": {
     "name": "Sra Gru Swim",
     "slug": "sra-gru-swim",
