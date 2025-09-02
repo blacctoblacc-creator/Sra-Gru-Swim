@@ -1,21 +1,26 @@
-{
-  "cli": {
-    "version": ">= 7.7.0"
-  },
-  "build": {
-    "preview": {
-      "distribution": "internal",
-      "android": {
-        "buildType": "apk"
-      }
-    },
-    "production": {
-      "android": {
-        "buildType": "app-bundle"
-      }
-    }
-  },
-  "submit": {
-    "production": {}
-  }
-}
+name: EAS Android APK
+on:
+  workflow_dispatch:
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+      - run: npm ci || npm i
+      - run: npm i -g eas-cli
+      - name: Build on EAS
+        run: eas build --platform android --profile preview --non-interactive
+        env:
+          EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
+      - name: Download APK
+        run: |
+          mkdir -p artifacts
+          eas build:download --platform android --profile preview --path artifacts/
+        env:
+          EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
