@@ -1,33 +1,13 @@
 {
-  "expo": {
-    "name": "Sra Gru Swim",
-    "slug": "sra-gru-swim",
-    "owner": "blacctoblacc",
-    "version": "1.0.0",
-    "orientation": "portrait",
-    "icon": "./assets/Mockups/blacc.png",
-    "splash": {
-      "image": "./assets/Mockups/splash-icon.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#000000"
+  "cli": { "version": ">= 7.7.0" },
+  "build": {
+    "preview": {
+      "distribution": "internal",
+      "android": { "buildType": "apk" }
     },
-    "userInterfaceStyle": "light",
-    "android": {
-      "package": "com.sragru.swim",
-      "softwareKeyboardLayoutMode": "resize",
-      "adaptiveIcon": {
-        "foregroundImage": "./assets/Mockups/blacc.png",
-        "backgroundColor": "#000000"
-      }
-    },
-    "web": {
-      "bundler": "metro",
-      "favicon": "./assets/Mockups/blacc.png"
-    },
-    "extra": {
-      "eas": {
-        "projectId": "70f0734d-28df-4fa3-9351-688a40abc45d"
-      }
+    "production": {
+      "android": { "buildType": "app-bundle" }
     }
-  }
+  },
+  "submit": { "production": {} }
 }
