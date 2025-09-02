@@ -1,4 +1,7 @@
-{
+name: EAS Android APK
+on:
+  workflow_dispatch:
+  {
   "cli": { "version": ">= 7.7.0" },
   "build": {
     "preview": {
