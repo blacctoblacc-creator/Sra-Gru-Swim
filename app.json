@@ -9,7 +9,12 @@
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#000000"
+      "android": {
+  "package": "com.sragru.swim",
+  "softwareKeyboardLayoutMode": "resize",
+  "adaptiveIcon": {
+    "foregroundImage": "./assets/icon.png",
+    "backgroundColor": "#00000"
     },
     "userInterfaceStyle": "light",
     "android": {
