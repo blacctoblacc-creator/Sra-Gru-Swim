@@ -1,21 +1,35 @@
 name: EAS Android APK
+
 on:
   workflow_dispatch:
+
+env:
+  EXPO_PROJECT_ID: 70f0734d-28df-4fa3-9351-688a40abc45d
 
 jobs:
   build:
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v4
 
-      - uses: actions/setup-node@v4
+      - name: Setup Node
+        uses: actions/setup-node@v4
         with:
-          node-version: 20
-          cache: 'npm'
+          node-version: "20"
 
-      - run: npm ci || npm i
+      - name: Install deps
+        run: npm ci || npm i
 
-      - run: npm i -g eas-cli
+      - name: Install EAS CLI
+        run: npm i -g eas-cli
+
+      # >>> Etapa nova: configura o projeto no EAS (idempotente)
+      - name: Init EAS project (first run)
+        run: eas init --id "$EXPO_PROJECT_ID" --non-interactive || true
+        env:
+          EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
 
       - name: Build on EAS
         run: eas build --platform android --profile preview --non-interactive
@@ -23,14 +37,5 @@ jobs:
           EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
 
       - name: Download APK
-        run: |
-          mkdir -p artifacts
-          eas build:download --platform android --profile preview --path artifacts/
-        env:
-          EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
-
-      - name: Upload artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: app-preview-apk
-          path: artifacts/*.apk
+        if: always()
+        run: echo "Done"
