@@ -13,7 +13,7 @@
     },
     "userInterfaceStyle": "light",
     "android": {
-      "android.package": "com.sragruswim.app",
+      "package": "com.sragruswim.app",
       "softwareKeyboardLayoutMode": "resize",
       "adaptiveIcon": {
         "foregroundImage": "./assets/icon.png",
@@ -25,8 +25,9 @@
       "favicon": "./assets/icon.png"
     },
     "extra": {
-    "eas": { "projectId": "70f0734d-28df-4fa3-9351-688a40abc45d" }
-    }
+      "eas": {
+        "projectId": "70f0734d-28df-4fa3-9351-688a40abc45d"
+      }
     }
   }
 }
