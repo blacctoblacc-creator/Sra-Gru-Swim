@@ -1,21 +1,27 @@
 {
-  "cli": {
-    "version": ">= 7.7.0"
-  },
-  "build": {
-    "preview": {
-      "distribution": "internal",
-      "android": {
-        "buildType": "apk"
-      }
+  "expo": {
+    "name": "Sra Gru Swim",
+    "slug": "sra-gru-swim",
+    "owner": "blacctc",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#000000"
     },
-    "production": {
-      "android": {
-        "buildType": "app-bundle"
+    "updates": {
+      "enabled": true
+    },
+    "platforms": ["android"],
+    "android": {
+      "package": "com.sragruswim.app"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "70f0734d-28df-4fa3-9351-688a40abc45d"
       }
     }
-  },
-  "submit": {
-    "production": {}
   }
 }
